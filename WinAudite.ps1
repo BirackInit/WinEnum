@@ -1,8 +1,8 @@
 <#
 Script: Nom_du_Script.ps1
-Description: Ce script affiche diverses informations sur le système d'exploitation, les utilisateurs, les services, les journaux d'événements, etc.
-Auteur: Hassan ATTEIB
-LinkedIn: https://www.linkedin.com/in/atteib-hassan-mahamat-%F0%9F%94%90-83a657221/
+Description: Ce script affiche diverses informations sur le systÃ¨me d'exploitation, les utilisateurs, les services, les journaux d'Ã©vÃ©nements, etc.
+Auteur: BirackInit
+LinkedIn: https://www.linkedin.com/in/birackinit-9a31a4405/
 Date: 14/05/2024
 #>
 
@@ -22,12 +22,12 @@ Date: 14/05/2024
 "                                                     "
 
 
-# Fonction pour afficher des informations sur le système d'exploitation
+# Fonction pour afficher des informations sur le systÃ¨me d'exploitation
 function Show-OSInfo {
     $osInfo = Get-WmiObject Win32_OperatingSystem
     $networkInfo = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object { $_.IPEnabled }
 
-    Write-Host "Système d'exploitation : " $osInfo.Caption
+    Write-Host "SystÃ¨me d'exploitation : " $osInfo.Caption
     Write-Host "Version : " $osInfo.Version
     Write-Host "Architecture du processeur : " (Get-WmiObject Win32_Processor).Architecture
     Write-Host "Nom de l'ordinateur : " $env:COMPUTERNAME
@@ -42,16 +42,16 @@ function Show-OSInfo {
     }
 }
 
-# Fonction pour afficher des informations système
+# Fonction pour afficher des informations systÃ¨me
 function Show-SystemInfo {
     Write-Host "Options :"
-    Write-Host "1- Afficher des informations sur le système d'exploitation"
-    Write-Host "2- Afficher les fichiers de partage sur les systèmes"
+    Write-Host "1- Afficher des informations sur le systÃ¨me d'exploitation"
+    Write-Host "2- Afficher les fichiers de partage sur les systÃ¨mes"
     Write-Host "3- Afficher les utilisateurs"
-    Write-Host "4- Afficher les services en cours d'exécution"
-    Write-Host "5- Afficher les journaux d'événements récents"
-    Write-Host "6- Afficher les services malconfigurés"
-    Write-Host "Saisir l'option que vous souhaitez exécuter :"
+    Write-Host "4- Afficher les services en cours d'exÃ©cution"
+    Write-Host "5- Afficher les journaux d'Ã©vÃ©nements rÃ©cents"
+    Write-Host "6- Afficher les services malconfigurÃ©s"
+    Write-Host "Saisir l'option que vous souhaitez exÃ©cuter :"
     $option = Read-Host
 
     switch ($option) {
@@ -67,7 +67,7 @@ function Show-SystemInfo {
 
 # Fonction pour afficher ses fichiers de partage
 function Show-SharedFiles {
-    Write-Host "Fichiers de partage sur les systèmes : "
+    Write-Host "Fichiers de partage sur les systÃ¨mes : "
     Get-SmbShare | Select-Object Name, Path
 }
 
@@ -77,31 +77,31 @@ function Show-Users {
     Get-WmiObject Win32_UserAccount | Select-Object Name, FullName
 }
 
-# Fonction pour lister les services en cours d'exécution
+# Fonction pour lister les services en cours d'exÃ©cution
 function Show-Services {
-    Write-Host "Services en cours d'exécution : "
+    Write-Host "Services en cours d'exÃ©cution : "
     Get-Service | Where-Object {$_.Status -eq "Running"} | Select-Object DisplayName, Status
 }
 
-# Fonction pour lister les journaux d'événements récents
+# Fonction pour lister les journaux d'Ã©vÃ©nements rÃ©cents
 function Show-EventLogs {
-    Write-Host "Journaux d'événements récents : "
+    Write-Host "Journaux d'Ã©vÃ©nements rÃ©cents : "
     Get-EventLog -LogName Application -Newest 10 | Select-Object TimeGenerated, Source, EventID, Message
 }
 
-# Fonction pour lister les services malconfigurés
+# Fonction pour lister les services malconfigurÃ©s
 function Show-MisconfiguredServices {
-    Write-Host "Services malconfigurés : "
+    Write-Host "Services malconfigurÃ©s : "
 
-    # Recherche des services avec des paramètres de démarrage non standard
+    # Recherche des services avec des paramÃ¨tres de dÃ©marrage non standard
     $misconfiguredServices = Get-WmiObject Win32_Service | Where-Object {$_.StartMode -ne "Auto"}
 
     if ($misconfiguredServices) {
-        Write-Host "Services avec des paramètres de démarrage non standard : "
+        Write-Host "Services avec des paramÃ¨tres de dÃ©marrage non standard : "
         $misconfiguredServices | Select-Object Name, StartMode
     }
 
-    # Autres vérifications de configuration peuvent être ajoutées ici
+    # Autres vÃ©rifications de configuration peuvent Ãªtre ajoutÃ©es ici
 }
 
 # Appel de la fonction principale
