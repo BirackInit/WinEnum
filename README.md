@@ -46,6 +46,4 @@ Cet outil doit être utilisé dans un cadre légal et éthique, exclusivement po
 * Des analyses de sécurité dans le cadre de missions légales avec consentement.
 * Un usage personnel en laboratoire pour des tests sur des environnements contrôlés.
 
-## 🎬 Démo
-
 Pour une démonstration de l'exécution de ce script et des résultats obtenus, vous pouvez consulter la vidéo de démonstration fournie dans ce dépôt, ou bien suivre les étapes décrites ci-dessus pour tester le script par vous-même.
